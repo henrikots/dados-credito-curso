@@ -1,0 +1,26 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1560221107158.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "0",
+    "id" : "1ADBE654",
+    "lastKnownWriteTime" : 1560389594,
+    "last_content_update" : 1560389594064,
+    "path" : "~/Projeto/R/dados-credito-curso/curso_ML/pre_processamento_credit_data.R",
+    "project_path" : "pre_processamento_credit_data.R",
+    "properties" : {
+        "cursorPosition" : "12,0",
+        "scrollLine" : "3",
+        "tempName" : "Untitled1"
+    },
+    "read_only" : false,
+    "read_only_alternatives" : [
+    ],
+    "relative_order" : 1,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

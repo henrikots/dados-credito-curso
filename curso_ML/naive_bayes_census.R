@@ -34,7 +34,16 @@ set.seed(1)
 
 divisao_c <- sample.split(basec$income, SplitRatio = 0.85)
 
-base_treinamento_c <- subset(basec, divisao == TRUE)
-base_teste_c <- subset(basec, divisao == FALSE)
+base_treinamento_c <- subset(basec, divisao_c == TRUE)
+base_teste_c <- subset(basec, divisao_c == FALSE)
 
+library(e1071)
+library(caret)
 
+classificador_nb_census <- naiveBayes(x <- base_treinamento_c[-15], y <- base_treinamento_c$income)
+
+previsoes_nb_census <- predict(classificador_nb_census, newdata =  base_teste_c[-15])
+
+matriz_confusao_nb_census <- table(base_teste_c[,15], previsoes_nb_census) #acerto de 82.14%
+
+confusionMatrix(matriz_confusao_nb_census)

@@ -1,0 +1,33 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1560714399925.000,
+    "dirty" : false,
+    "encoding" : "",
+    "folds" : "",
+    "hash" : "0",
+    "id" : "EA460BD2",
+    "lastKnownWriteTime" : 1560714289,
+    "last_content_update" : 1560714399925,
+    "path" : null,
+    "project_path" : null,
+    "properties" : {
+        "cacheKey" : "AED49721",
+        "caption" : "basec",
+        "contentUrl" : "grid_resource/gridviewer.html?env=&obj=basec&cache_key=AED49721",
+        "displayedObservations" : 30162,
+        "environment" : "",
+        "expression" : "basec",
+        "object" : "basec",
+        "preview" : 0,
+        "totalObservations" : 30162,
+        "variables" : 15
+    },
+    "read_only" : false,
+    "read_only_alternatives" : [
+    ],
+    "relative_order" : 3,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_dataframe"
+}

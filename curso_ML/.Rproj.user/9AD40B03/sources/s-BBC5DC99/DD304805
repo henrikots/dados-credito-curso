@@ -1,25 +1,25 @@
 {
     "collab_server" : "",
     "contents" : "",
-    "created" : 1560550620626.000,
+    "created" : 1560714267168.000,
     "dirty" : false,
     "encoding" : "UTF-8",
     "folds" : "",
-    "hash" : "2792336154",
-    "id" : "73147A27",
-    "lastKnownWriteTime" : 1560531199,
-    "last_content_update" : 1560531199,
+    "hash" : "2102577255",
+    "id" : "DD304805",
+    "lastKnownWriteTime" : 1560714330,
+    "last_content_update" : 1560714330020,
     "path" : "~/Projeto/R/dados-credito-curso/curso_ML/pre_processamento_census.R",
     "project_path" : "pre_processamento_census.R",
     "properties" : {
-        "cursorPosition" : "29,0",
-        "scrollLine" : "12",
+        "cursorPosition" : "36,45",
+        "scrollLine" : "21",
         "tempName" : "Untitled1"
     },
     "read_only" : false,
     "read_only_alternatives" : [
     ],
-    "relative_order" : 2,
+    "relative_order" : 1,
     "source_on_save" : false,
     "source_window" : "",
     "type" : "r_source"

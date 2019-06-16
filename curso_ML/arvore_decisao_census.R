@@ -37,4 +37,9 @@ divisao_c <- sample.split(basec$income, SplitRatio = 0.85)
 base_treinamento_c <- subset(basec, divisao_c == TRUE)
 base_teste_c <- subset(basec, divisao_c == FALSE)
 
+library(rpart)
+
+classificador_ad_census <- rpart(formula = income ~ ., data = base_treinamento_c)
+previsao_ad_census <- predict(classificador_ad_census, newdata = base_teste_c[-15], type = "class")
+
 

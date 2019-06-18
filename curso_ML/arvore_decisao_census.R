@@ -42,4 +42,35 @@ library(rpart)
 classificador_ad_census <- rpart(formula = income ~ ., data = base_treinamento_c)
 previsao_ad_census <- predict(classificador_ad_census, newdata = base_teste_c[-15], type = "class")
 
+matriz_confusao = table(base_teste_c[, 15], previsao_ad_census)
 
+library(caret)
+confusionMatrix(matriz_confusao) #83.51%
+
+
+################## utilizando a poda
+classificador_ad_census <- rpart(formula = income ~ ., data = base_treinamento_c)
+
+#seleciona o nó  de menor erro
+poda = classificador_ad_census$cptable[which.min(classificador_ad_census$cptable[, "xerror"]), "CP"]
+
+classificador_poda <- prune(classificador_ad_census, 0.05)
+
+previsao_poda <- predict(classificador_poda, newdata = base_teste_c[-15], type = "class")
+
+matriz_confusao = table(base_teste_c[, 15], previsao_poda)
+
+confusionMatrix(matriz_confusao) #82.54%
+
+################# utilizando random forest
+
+#install.packages("randomForest")
+library(randomForest)
+
+classificador_rf <- randomForest(x = base_treinamento_c[-15], y = base_treinamento_c$income, ntree = 20)
+previsoes_rf <- predict(classificador_rf, newdata = base_teste_c[-15])
+
+
+matriz_confusao_rf = table(base_teste_c[, 15], previsoes_rf)
+
+confusionMatrix(matriz_confusao_rf) #10 = 84.53%, 15 = 85.23%, 10 = 85.34%

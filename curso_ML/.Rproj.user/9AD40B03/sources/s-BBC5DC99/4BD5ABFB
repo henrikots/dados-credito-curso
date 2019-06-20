@@ -1,0 +1,26 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1561060230366.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "3497443534",
+    "id" : "4BD5ABFB",
+    "lastKnownWriteTime" : 1561061581,
+    "last_content_update" : 1561061581719,
+    "path" : "~/Projeto/R/dados-credito-curso/curso_ML/cn2_census.R",
+    "project_path" : "cn2_census.R",
+    "properties" : {
+        "cursorPosition" : "49,40",
+        "scrollLine" : "31",
+        "tempName" : "Untitled1"
+    },
+    "read_only" : false,
+    "read_only_alternatives" : [
+    ],
+    "relative_order" : 2,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

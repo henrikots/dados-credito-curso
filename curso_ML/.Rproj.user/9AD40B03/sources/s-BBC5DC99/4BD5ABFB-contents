@@ -1,0 +1,50 @@
+basec <- read.csv("census.csv")
+basec <- basec[-1]
+
+#busca os valores categoricos existentes na coluna
+table(basec$sex)
+
+#troca os atributos de categoricos por numericos
+basec$sex <- factor(basec$sex, levels = c(" Female", " Male"), labels = c(0, 1))
+
+basec$workclass = factor(basec$workclass, levels = c(' Federal-gov', ' Local-gov', ' Private', ' Self-emp-inc', ' Self-emp-not-inc', ' State-gov', ' Without-pay'), labels = c(1, 2, 3, 4, 5, 6, 7))
+basec$education = factor(basec$education, levels = c(' 10th', ' 11th', ' 12th', ' 1st-4th', ' 5th-6th', ' 7th-8th', ' 9th', ' Assoc-acdm', ' Assoc-voc', ' Bachelors', ' Doctorate', ' HS-grad', ' Masters', ' Preschool', ' Prof-school', ' Some-college'), labels = c(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16))
+basec$marital.status = factor(basec$marital.status, levels = c(' Divorced', ' Married-AF-spouse', ' Married-civ-spouse', ' Married-spouse-absent', ' Never-married', ' Separated', ' Widowed'), labels = c(1, 2, 3, 4, 5, 6, 7))
+basec$occupation = factor(basec$occupation, levels = c(' Adm-clerical', ' Armed-Forces', ' Craft-repair', ' Exec-managerial', ' Farming-fishing', ' Handlers-cleaners', ' Machine-op-inspct', ' Other-service', ' Priv-house-serv', ' Prof-specialty', ' Protective-serv', ' Sales', ' Tech-support', ' Transport-moving'), labels = c(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14))
+basec$relationship = factor(basec$relationship, levels = c(' Husband', ' Not-in-family', ' Other-relative', ' Own-child', ' Unmarried', ' Wife'), labels = c(1, 2, 3, 4, 5, 6))
+basec$race = factor(basec$race, levels = c(' Amer-Indian-Eskimo', ' Asian-Pac-Islander', ' Black', ' Other', ' White'), labels = c(1, 2, 3, 4, 5))
+basec$native.country = factor(basec$native.country, levels = c(' Cambodia', ' Canada', ' China', ' Columbia', ' Cuba', ' Dominican-Republic', ' Ecuador', ' El-Salvador', ' England', ' France', ' Germany', ' Greece', ' Guatemala', ' Haiti', ' Holand-Netherlands', ' Honduras', ' Hong', ' Hungary', ' India', ' Iran', ' Ireland', ' Italy', ' Jamaica', ' Japan', ' Laos', ' Mexico', ' Nicaragua', ' Outlying-US(Guam-USVI-etc)', ' Peru', ' Philippines', ' Poland', ' Portugal', ' Puerto-Rico', ' Scotland', ' South', ' Taiwan', ' Thailand', ' Trinadad&Tobago', ' United-States', ' Vietnam', ' Yugoslavia'), labels = c(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41))
+basec$income = factor(basec$income, levels = c(' <=50K', ' >50K'), labels = c(0, 1))
+
+#escalona as colunas que são numericas
+basec[which(sapply(basec,is.numeric))] <- scale(basec[which(sapply(basec,is.numeric))])
+
+library(caTools)
+
+set.seed(1)
+
+divisao_c <- sample.split(basec$income, SplitRatio = 0.05)
+
+base_treinamento_c <- subset(basec, divisao_c == TRUE)
+base_teste_c <- subset(basec, divisao_c == FALSE)
+
+library(RoughSets)
+
+dt_treinamento <- SF.asDecisionTable(dataset = base_treinamento_c, decision.attr = 15)
+dt_teste <- SF.asDecisionTable(dataset = base_teste_c, decision.attr = 15)
+
+'dicretização, num to categorico'
+
+intervalos = D.discretization.RST(dt_treinamento, nOfIntervals = 4)
+dt_treinamento = SF.applyDecTable(dt_treinamento, intervalos)
+dt_teste = SF.applyDecTable(dt_teste, intervalos)
+
+classificador = RI.CN2Rules.RST(dt_treinamento, K = 1)
+print(classificador)
+
+previsoes <- predict(classificador, newdata = dt_teste[-15])
+
+matriz_confusao <- table(dt_teste[, 15], unlist(previsoes))
+
+library(caret)
+confusionMatrix(matriz_confusao) #76.89%

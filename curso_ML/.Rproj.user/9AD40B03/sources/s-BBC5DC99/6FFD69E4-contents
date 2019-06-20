@@ -1,0 +1,6 @@
+base = read.csv("risco-credito.csv")
+
+#install.packages("OneR")
+library(OneR)
+
+classificador = OneR(x = base)

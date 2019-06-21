@@ -1,0 +1,26 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1561154923655.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "2108842883",
+    "id" : "6862EB92",
+    "lastKnownWriteTime" : 1561155120,
+    "last_content_update" : 1561155120277,
+    "path" : "~/Projeto/R/dados-credito-curso/curso_ML/regressao_logistica_census.R",
+    "project_path" : "regressao_logistica_census.R",
+    "properties" : {
+        "cursorPosition" : "40,50",
+        "scrollLine" : "36",
+        "tempName" : "Untitled1"
+    },
+    "read_only" : false,
+    "read_only_alternatives" : [
+    ],
+    "relative_order" : 4,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

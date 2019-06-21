@@ -1,0 +1,26 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1561153103633.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "304952782",
+    "id" : "4AD7843C",
+    "lastKnownWriteTime" : 1561153732,
+    "last_content_update" : 1561153732715,
+    "path" : "~/Projeto/R/dados-credito-curso/curso_ML/regressao_logistica_credit_data.R",
+    "project_path" : "regressao_logistica_credit_data.R",
+    "properties" : {
+        "cursorPosition" : "46,0",
+        "scrollLine" : "26",
+        "tempName" : "Untitled1"
+    },
+    "read_only" : false,
+    "read_only_alternatives" : [
+    ],
+    "relative_order" : 2,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

@@ -7,6 +7,15 @@ table(basec$sex)
 #troca os atributos de categoricos por numericos
 basec$sex <- factor(basec$sex, levels = c(" Female", " Male"), labels = c(0, 1))
 
+#basec$workclass <- factor(basec$workclass, levels = unique(basec$workclass), labels = c(1:ifelse(length(unique(basec$workclass)) > 2, length(unique(basec$workclass)), 2)))
+#basec$education <- factor(basec$education, levels = unique(basec$education), labels = c(1:ifelse(length(unique(basec$education)) > 2, length(unique(basec$education)), 2)))
+#basec$marital.status <- factor(basec$marital.status, levels = unique(basec$marital.status), labels = c(1:ifelse(length(unique(basec$marital.status)) > 2, length(unique(basec$marital.status)), 2)))
+#basec$occupation <- factor(basec$occupation, levels = unique(basec$occupation), labels = c(1:ifelse(length(unique(basec$occupation)) > 2, length(unique(basec$occupation)), 2)))
+#basec$relationship <- factor(basec$relationship, levels = unique(basec$relationship), labels = c(1:ifelse(length(unique(basec$relationship)) > 2, length(unique(basec$relationship)), 2)))
+#basec$race <- factor(basec$race, levels = unique(basec$race), labels = c(1:ifelse(length(unique(basec$race)) > 2, length(unique(basec$race)), 2)))
+#basec$native.country <- factor(basec$native.country, levels = unique(basec$native.country), labels = c(1:ifelse(length(unique(basec$native.country)) > 2, length(unique(basec$native.country)), 2)))
+#basec$income <- factor(basec$income, levels = unique(basec$income), labels = c(1:length( unique(basec$income))))
+
 basec$workclass = factor(basec$workclass, levels = c(' Federal-gov', ' Local-gov', ' Private', ' Self-emp-inc', ' Self-emp-not-inc', ' State-gov', ' Without-pay'), labels = c(1, 2, 3, 4, 5, 6, 7))
 basec$education = factor(basec$education, levels = c(' 10th', ' 11th', ' 12th', ' 1st-4th', ' 5th-6th', ' 7th-8th', ' 9th', ' Assoc-acdm', ' Assoc-voc', ' Bachelors', ' Doctorate', ' HS-grad', ' Masters', ' Preschool', ' Prof-school', ' Some-college'), labels = c(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16))
 basec$marital.status = factor(basec$marital.status, levels = c(' Divorced', ' Married-AF-spouse', ' Married-civ-spouse', ' Married-spouse-absent', ' Never-married', ' Separated', ' Widowed'), labels = c(1, 2, 3, 4, 5, 6, 7))
@@ -23,28 +32,24 @@ library(caTools)
 
 set.seed(1)
 
-divisao_c <- sample.split(basec$income, SplitRatio = 0.05)
+divisao_c <- sample.split(basec$income, SplitRatio = 0.85)
 
 base_treinamento_c <- subset(basec, divisao_c == TRUE)
 base_teste_c <- subset(basec, divisao_c == FALSE)
 
-library(RoughSets)
 
-dt_treinamento <- SF.asDecisionTable(dataset = base_treinamento_c, decision.attr = 15)
-dt_teste <- SF.asDecisionTable(dataset = base_teste_c, decision.attr = 15)
+#classificador do algoritmo de regressao logistica
+classificador <- glm(formula = income ~ ., family = binomial, data = base_treinamento_c )
 
-'dicretização, num to categorico'
 
-intervalos = D.discretization.RST(dt_treinamento, nOfIntervals = 4)
-dt_treinamento = SF.applyDecTable(dt_treinamento, intervalos)
-dt_teste = SF.applyDecTable(dt_teste, intervalos)
+probabilidades <- predict(classificador, type = "response", newdata = base_teste_c[, -15])
+previsoes <- ifelse(probabilidades > 0.5, 1, 0)
 
-classificador = RI.CN2Rules.RST(dt_treinamento, K = 1)
-print(classificador)
-
-previsoes <- predict(classificador, newdata = dt_teste[-15])
-
-matriz_confusao <- table(dt_teste[, 15], unlist(previsoes))
+matriz_confusao <- table(base_teste_c[,15], previsoes)
 
 library(caret)
-confusionMatrix(matriz_confusao) #76.89%
+
+confusionMatrix(matriz_confusao) #83.73%
+
+
+

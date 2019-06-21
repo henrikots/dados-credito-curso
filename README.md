@@ -1,2 +1,2 @@
 # dados-credito-curso
-Tratamento de uma base de dados de crédito para predição utilizando Machine Learning
+Tratamento de uma bases de dados para análises utilizando algoritmos de Machine Learning
